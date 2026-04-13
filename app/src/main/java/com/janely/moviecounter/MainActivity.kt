@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MaterialTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    CheckboxComponentScreen(
+                    SwitchComponentScreen(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -35,8 +35,8 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun CheckboxComponentScreen(modifier: Modifier = Modifier) {
-    var checked by remember { mutableStateOf(false) }
+fun SwitchComponentScreen(modifier: Modifier = Modifier) {
+    var enabled by remember { mutableStateOf(false) }
 
     Column(
         modifier = modifier
@@ -45,11 +45,14 @@ fun CheckboxComponentScreen(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Checkbox(
-                checked = checked,
-                onCheckedChange = { checked = it }
+            Switch(
+                checked = enabled,
+                onCheckedChange = { enabled = it }
             )
-            Text(text = if (checked) "Aceptado" else "No aceptado")
+            Text(
+                text = if (enabled) "Modo activado" else "Modo desactivado",
+                modifier = Modifier.padding(start = 12.dp)
+            )
         }
     }
 }
