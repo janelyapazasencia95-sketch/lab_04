@@ -13,6 +13,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,7 +40,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MovieCounter(modifier: Modifier = Modifier) {
-    val count = 0
+    var count by remember { mutableStateOf(0) }
 
     Column(
         modifier = modifier.padding(16.dp),
@@ -44,7 +48,7 @@ fun MovieCounter(modifier: Modifier = Modifier) {
     ) {
         Text(text = "You have added $count movies.")
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = { }) {
+        Button(onClick = { count++ }) {
             Text("Add Movie")
         }
     }
